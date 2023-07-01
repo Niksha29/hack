@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    gap: 100px;
+}
+
+.box {
+    flex: 0.4;
+    background-color: #000000;
+}
+
+.box img {
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+}
+
+.box-2 {
+    margin-top: -15px;
+    margin-right: -200px;
+    box-shadow: 0 0 50px 5px rgb(233, 175, 29);
+    border-radius: 250px;
+}
+
+.container {
+    position: relative;
+}
+
+.container img {
+    animation: zoomInOut 2s infinite alternate ease-in-out;
+}
+
+@keyframes zoomInOut {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.box-1{
+    color: aliceblue;
+}
