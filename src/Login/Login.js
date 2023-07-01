@@ -1,23 +1,56 @@
-import React from "react";
+import React ,{useState} from "react";
 import './Login.css';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+    const history=useNavigate();
+
+
+    const [username,setUsername]=useState('')
+    const [password,setPassword]=useState('')
+
+    async function submit(e){
+        e.preventDefault();
+
+        try{
+            await axios.post("http://localhost:3000/login",{
+                username,password
+            })
+            .then(res=>{
+                if(res.data="exist"){
+                    history("/home",{state:{id:username}})
+                }
+                else if(res.data="exist"){
+                   alert("user have not signup")
+                }
+            })
+            .catch(e =>{
+                alert("wrong details")
+                console.log(e)
+            })
+
+        }
+        catch{
+            console.log(e);
+        }
+    }
     return (
         <div className="form-container">
             <p className="title">Log In</p>
-            <form className="form">
+            <form className="form" action="POST">
                 <div className="input-group">
                     <label for="username">Username</label>
-                    <input type="text" name="username" id="username" placeholder="" />
+                    <input type="text" name="username" id="username" placeholder="" onChange={(e)=>{setUsername(e.target.value)}} />
                 </div>
                 <div className="input-group">
                     <label for="password">Password</label>
-                    <input type="password" name="password" id="password" placeholder="" />
+                    <input type="password" name="password" id="password" placeholder=""  onChange={(e)=>{setPassword(e.target.value)}}/>
                         <div className="forgot">
                             <a rel="noopener noreferrer" href=" ">Forgot Password ?</a>
                         </div>
                 </div>
-                <button className="sign">Log in</button>
+                <button className="sign" onClick={submit}>Log in</button>
             </form>
             <div className="social-message">
                 <div class="line"></div>
